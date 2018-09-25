@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">WordGenerate</string>
+    <string name="open_folder">打开目录</string>
+    <string name="open_mode">模板制作</string>
+
+    <string name="file_size">大小</string>
+    <string name="file_name">文件名称</string>
+    <string name="file_date">日期</string>
+
+</resources>
