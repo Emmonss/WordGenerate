@@ -44,7 +44,7 @@ public class Word_Relative_List_Activity extends AppCompatActivity {
         File[] files = path.listFiles(new FileFilter() {
             // 实现之接口
             public boolean accept(File file) {
-                return file.getName().endsWith(".doc") || file.getName().endsWith(".docx")|| file.getName().endsWith(".rar");
+                return file.getName().endsWith(".doc") || file.getName().endsWith(".docx");
             }
         });
 

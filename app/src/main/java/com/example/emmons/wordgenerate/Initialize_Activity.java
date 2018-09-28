@@ -56,9 +56,6 @@ public class Initialize_Activity extends AppCompatActivity {
             notifySystemToScan(appDir);
             //Toast.makeText(Initialize_Activity.this,FILE_PATH_NAME+"创建成功",Toast.LENGTH_LONG).show();
         }
-        else{
-           // Toast.makeText(Initialize_Activity.this,FILE_PATH_NAME+"已经存在",Toast.LENGTH_LONG).show();
-        }
     }
 
     //广播创建的文件
@@ -72,7 +69,6 @@ public class Initialize_Activity extends AppCompatActivity {
         catch (Exception e){
             Toast.makeText(Initialize_Activity.this,"创建失败！",Toast.LENGTH_LONG).show();
         }
-
 //这里是context.sendBroadcast(intent);
 
     }
@@ -94,10 +90,11 @@ public class Initialize_Activity extends AppCompatActivity {
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED || checkWriteSDPermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(Initialize_Activity.this, new String[]{Manifest.permission.CAMERA
                         , Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
-                return;
-            } else {
             }
-        } else {
+            else {
+            }
+        }
+        else {
         }
     }
 
