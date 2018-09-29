@@ -1,6 +1,7 @@
 package com.example.emmons.wordgenerate;
 
 import android.Manifest;
+import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -31,6 +32,8 @@ public class Initialize_Activity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initialize);
+        getSupportActionBar().hide();
+
         File appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
         get_SDcard_permission();
         get_File_Path(appDir);

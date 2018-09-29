@@ -1,5 +1,6 @@
 package com.example.emmons.wordgenerate;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        getSupportActionBar().hide();
         handler.sendEmptyMessageDelayed(0, 1000);
     }
 

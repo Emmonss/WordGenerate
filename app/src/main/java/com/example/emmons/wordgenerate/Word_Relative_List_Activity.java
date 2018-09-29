@@ -1,6 +1,7 @@
 package com.example.emmons.wordgenerate;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
@@ -57,12 +58,12 @@ public class Word_Relative_List_Activity extends AppCompatActivity {
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
-                    public void onItemClick(
-                            AdapterView<?> parent,
-                            View view,
-                            int position,
-                            long id) {
-                        File f = fileAdapter.getItem(position);
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        String path  = fileAdapter.getItem(position).getPath();
+                        Intent intent = new Intent(Word_Relative_List_Activity.this,Html_show_Activity.class);
+                        intent.putExtra("path",path);
+                        startActivity(intent);
+                        //Toast.makeText(Word_Relative_List_Activity.this,path,Toast.LENGTH_LONG).show();
                     }
                 }
         );
