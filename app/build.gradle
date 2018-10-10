@@ -25,6 +25,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:0.5'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+//    compile files('libs/poi-3.15.jar')
+//    compile files('libs/poi-scratchpad-3.15.jar')
     compile files('libs/poi-3.9-20121203.jar')
     compile files('libs/poi-scratchpad-3.9-20121203.jar')
 }

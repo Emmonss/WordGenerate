@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#bcb9b9"
+    android:id="@+id/ll_hide"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal">
+    <!--android:visibility="gone"-->
+
+
+
+
+    <TextView
+    android:id="@+id/open"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:textColor="@drawable/text_color"
+    android:text="@string/text_open" />
+
+    <TextView
+    android:id="@+id/update"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:textColor="@drawable/text_color"
+    android:text="@string/text_update" />
+
+    <TextView
+    android:id="@+id/delete"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:gravity="center"
+    android:textColor="@drawable/text_color"
+    android:text="@string/text_delete" />
+
+    <TextView
+    android:id="@+id/entity"
+    android:layout_width="0dp"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:textColor="@drawable/text_color"
+    android:gravity="center"
+    android:text="@string/text_entity" />
+
+
+    </LinearLayout>

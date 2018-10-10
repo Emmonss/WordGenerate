@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ public class Word_Relative_List_Activity extends AppCompatActivity {
     MyFile_Adapter fileAdapter;
 
     File[] data;
+
 
 
     @Override
@@ -52,18 +54,25 @@ public class Word_Relative_List_Activity extends AppCompatActivity {
         data = files;
 
         fileAdapter = new MyFile_Adapter(this, data);
+
+
+
         listView.setAdapter(fileAdapter);
+
+
+
 
         // 注册监听器
         listView.setOnItemClickListener(
                 new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        String path  = fileAdapter.getItem(position).getPath();
-                        Intent intent = new Intent(Word_Relative_List_Activity.this,Html_show_Activity.class);
-                        intent.putExtra("path",path);
-                        startActivity(intent);
-                        //Toast.makeText(Word_Relative_List_Activity.this,path,Toast.LENGTH_LONG).show();
+
+//                        String path  = fileAdapter.getItem(position).getPath();
+//                        Intent intent = new Intent(Word_Relative_List_Activity.this,Html_show_Activity.class);
+//                        intent.putExtra("path",path);
+//                        startActivity(intent);
+//                        Toast.makeText(Word_Relative_List_Activity.this,path,Toast.LENGTH_LONG).show();
                     }
                 }
         );

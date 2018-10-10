@@ -8,4 +8,10 @@
     <string name="file_date">日期</string>
     <string name="title_activity_html__show_">Html_Show_Activity</string>
 
+    <string name="text_open">打开</string>
+    <string name="text_update">上传</string>
+    <string name="text_delete">删除</string>
+    <string name="text_entity">更新</string>
+
+
 </resources>

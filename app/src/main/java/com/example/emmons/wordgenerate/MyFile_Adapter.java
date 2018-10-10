@@ -1,6 +1,7 @@
 package com.example.emmons.wordgenerate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,7 +9,11 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.text.DecimalFormat;
@@ -21,11 +26,15 @@ import java.util.Date;
  */
 public class MyFile_Adapter extends BaseAdapter {
 
+    int clickPosition = -1;
+    static int counter = 1;
 
     Context context;
     File[] files;
     ArrayList<File> fileList;
     LayoutInflater layoutInflater;
+
+//    ImageButton action ;
 
 
     public MyFile_Adapter(Context context, File[] files) {
@@ -55,12 +64,12 @@ public class MyFile_Adapter extends BaseAdapter {
 
     @Override
     public View getView(
-            int i,
+            final int i,
             View convertView,
             ViewGroup viewGroup) {
 
         ViewHolder holder;
-
+        final String path = files[i].getName();
         if (convertView == null) {
             // 没有可复用，需要创建
             // 开销很大 加载文件、XML 解析 控件和布局的
@@ -82,19 +91,89 @@ public class MyFile_Adapter extends BaseAdapter {
         // 加载数据
         holder.bindData(files[i]);
 
+        //点击右侧图片打开隐藏条目
+        open_hide_item(holder,i);
+
+        //给属性增加监听器
+        add_item_listener(holder,i);
+
+
+
+
         return convertView;
     }
 
-    static int counter = 1;
 
+    //点击右侧图片打开隐藏条目
+    public void open_hide_item(ViewHolder holder,final int i){
+        if (clickPosition == i) {
+            if (holder.action.isSelected()) {
+                holder.action.setSelected(false);
+                holder.ll_hide.setVisibility(View.GONE);
+                clickPosition=-1;
+            } else {
+                holder.action.setSelected(true);
+                holder.ll_hide.setVisibility(View.VISIBLE);
+            }
+        }
+        else {
+            holder.ll_hide.setVisibility(View.GONE);
+            holder.action.setSelected(false);
+        }
+
+        holder.action.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickPosition = i;
+                notifyDataSetChanged();
+            }
+        });
+    }
+
+    //给属性增加监听器
+    public void add_item_listener(final ViewHolder holder,final int i){
+
+        holder.open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String path = getItem(i).getPath();
+                Intent intent = new Intent(context,Html_show_Activity.class);
+                intent.putExtra("path",path);
+                context.startActivity(intent);
+            }
+        });
+
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"delete",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.entity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"entity",Toast.LENGTH_LONG).show();
+            }
+        });
+
+        holder.update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context,"update",Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     static class ViewHolder {
 
         ImageView icon;
         TextView title;
         TextView info;
-        ImageButton action;
+        ImageView action;
         TextView date;
+        TextView open, update, delete, entity;
+        LinearLayout ll_hide;
         int id;
 
 
@@ -103,9 +182,18 @@ public class MyFile_Adapter extends BaseAdapter {
             title = (TextView) v.findViewById(R.id.textView_name);
             info = (TextView) v.findViewById(R.id.textView_info);
             date = (TextView) v.findViewById(R.id.textView_date);
-            action = (ImageButton) v.findViewById(R.id.imageButton_action);
+            action = (ImageView) v.findViewById(R.id.imageButton_action);
+
+
+            open = (TextView) v.findViewById(R.id.open);
+            update = (TextView) v.findViewById(R.id.update);
+            delete = (TextView) v.findViewById(R.id.delete);
+            entity = (TextView) v.findViewById(R.id.entity);
+            ll_hide = (LinearLayout) v.findViewById(R.id.ll_hide);
+
             id = counter++;
         }
+
 
 
 
