@@ -1,8 +1,9 @@
 <resources>
-    <string name="app_name">文件目录</string>
+    <string name="app_name">文档生成器</string>
     <string name="open_folder">打开目录</string>
     <string name="open_mode">模板制作</string>
 
+    <string name="file_item">文件列表</string>
     <string name="file_size">大小</string>
     <string name="file_name">文件名称</string>
     <string name="file_date">日期</string>
@@ -12,6 +13,11 @@
     <string name="text_update">上传</string>
     <string name="text_delete">删除</string>
     <string name="text_entity">更新</string>
+
+    <string name="model_item">模板名称</string>
+    <string name="model_list">模板列表</string>
+
+
 
 
 </resources>

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -28,11 +29,11 @@ public class Initialize_Activity extends AppCompatActivity {
 
 
     private ImageView iv_open_folder;
+    private ImageView iv_open_model;
 
     protected void onCreate(@Nullable Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initialize);
-        getSupportActionBar().hide();
 
         File appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
         get_SDcard_permission();
@@ -49,6 +50,28 @@ public class Initialize_Activity extends AppCompatActivity {
         });
 
 
+        iv_open_model = (ImageView)findViewById(R.id.make_model);
+
+        iv_open_model.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Make_Model();
+            }
+        });
+
+    }
+    private void Open_Folder(){
+        Intent intent = new Intent(Initialize_Activity.this,Word_Relative_List_Activity.class);
+        intent.putExtra("path",FILE_PATH_NAME);
+        startActivity(intent);
+
+    }
+
+
+    private void Make_Model(){
+        Intent intent = new Intent(Initialize_Activity.this,Model_Relative_List_Activity.class);
+        intent.putExtra("path",FILE_PATH_NAME);
+        startActivity(intent);
     }
 
     //查看目标文件夹是否创建
@@ -78,12 +101,7 @@ public class Initialize_Activity extends AppCompatActivity {
 
 
 
-    private void Open_Folder(){
-        Intent intent = new Intent(Initialize_Activity.this,Word_Relative_List_Activity.class);
-        intent.putExtra("path",FILE_PATH_NAME);
-        startActivity(intent);
 
-    }
     //获得手机相机和图册的权限
     private void get_SDcard_permission()
     {

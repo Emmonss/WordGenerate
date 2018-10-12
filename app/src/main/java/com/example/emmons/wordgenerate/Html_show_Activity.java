@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 public class Html_show_Activity extends AppCompatActivity {
 
-    private String savePath = "/mnt/sdcard/WordGenerate/html/";
+    private String savePath = "/mnt/sdcard/WordGenerate/file/html/";
     private String name = "temp";
 
     private Word_to_Doc wc = new Word_to_Doc();
@@ -25,7 +25,6 @@ public class Html_show_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
-        getSupportActionBar().hide();
 
 
         Intent intent=getIntent();

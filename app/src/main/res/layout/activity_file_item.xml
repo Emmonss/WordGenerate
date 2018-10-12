@@ -75,7 +75,7 @@
 
     </RelativeLayout>
 
-    <include layout="@layout/hidden_button"
+    <include layout="@layout/activity_hidden_button"
         />
 
 </LinearLayout>

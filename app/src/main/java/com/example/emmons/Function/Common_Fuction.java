@@ -3,6 +3,7 @@ package com.example.emmons.Function;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.widget.Toast;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -75,5 +76,24 @@ public class Common_Fuction {
         }
         catch (Exception e){
         }
+    }
+
+    public boolean deleteSingleFile(Context context,String filePath$Name) {
+        File file = new File(filePath$Name);        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
+        if (file.exists() && file.isFile()) {
+            if (file.delete()) {
+                notifySystemToScan(context,file);
+                return true;
+            }
+            else {
+                Toast.makeText(context, "删除单个文件" + filePath$Name + "失败！", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        }
+        else {
+            Toast.makeText(context, "删除单个文件失败：" + filePath$Name + "不存在！", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
     }
 }

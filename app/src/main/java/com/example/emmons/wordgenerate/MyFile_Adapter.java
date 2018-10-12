@@ -1,7 +1,12 @@
 package com.example.emmons.wordgenerate;
 
+import com.example.emmons.Function.Common_Fuction;
+
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +25,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 自定义适配器
@@ -33,6 +39,7 @@ public class MyFile_Adapter extends BaseAdapter {
     File[] files;
     ArrayList<File> fileList;
     LayoutInflater layoutInflater;
+    Common_Fuction cf;
 
 //    ImageButton action ;
 
@@ -40,10 +47,18 @@ public class MyFile_Adapter extends BaseAdapter {
     public MyFile_Adapter(Context context, File[] files) {
         this.context = context;
         this.files = files;
+        this.cf = new Common_Fuction();
 
         // 获得服务实例
         layoutInflater = LayoutInflater.from(context);
 
+    }
+    public void delete_file(int i){
+        List<File> l1 = new ArrayList<File>();
+        for(int count = 0;count<this.files.length;count++)
+            l1.add(this.files[count]);
+        l1.remove(i);
+        this.files = l1.toArray(new File[l1.size()]);
     }
 
     @Override
@@ -69,7 +84,6 @@ public class MyFile_Adapter extends BaseAdapter {
             ViewGroup viewGroup) {
 
         ViewHolder holder;
-        final String path = files[i].getName();
         if (convertView == null) {
             // 没有可复用，需要创建
             // 开销很大 加载文件、XML 解析 控件和布局的
@@ -107,21 +121,21 @@ public class MyFile_Adapter extends BaseAdapter {
     //点击右侧图片打开隐藏条目
     public void open_hide_item(ViewHolder holder,final int i){
         if (clickPosition == i) {
-            if (holder.action.isSelected()) {
-                holder.action.setSelected(false);
+            if (holder.iv_action.isSelected()) {
+                holder.iv_action.setSelected(false);
                 holder.ll_hide.setVisibility(View.GONE);
                 clickPosition=-1;
             } else {
-                holder.action.setSelected(true);
+                holder.iv_action.setSelected(true);
                 holder.ll_hide.setVisibility(View.VISIBLE);
             }
         }
         else {
             holder.ll_hide.setVisibility(View.GONE);
-            holder.action.setSelected(false);
+            holder.iv_action.setSelected(false);
         }
 
-        holder.action.setOnClickListener(new View.OnClickListener() {
+        holder.iv_action.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clickPosition = i;
@@ -133,31 +147,43 @@ public class MyFile_Adapter extends BaseAdapter {
     //给属性增加监听器
     public void add_item_listener(final ViewHolder holder,final int i){
 
-        holder.open.setOnClickListener(new View.OnClickListener() {
+        holder.tv_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String path = getItem(i).getPath();
                 Intent intent = new Intent(context,Html_show_Activity.class);
                 intent.putExtra("path",path);
                 context.startActivity(intent);
+                //Toast.makeText(context,"打开："+path,Toast.LENGTH_LONG).show();
             }
         });
 
-        holder.delete.setOnClickListener(new View.OnClickListener() {
+        holder.tv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context,"delete",Toast.LENGTH_LONG).show();
+                Dialog dia = new AlertDialog.Builder(context)
+                        .setMessage("确定删除该文档吗？")
+                        .setPositiveButton("确定",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dia,int whichButton){
+                                                cf.deleteSingleFile(context,getItem(i).getPath());
+                                                delete_file(i);
+                                                notifyDataSetChanged();
+                            }})
+                        .setNegativeButton("取消",new DialogInterface.OnClickListener(){
+                            public void onClick(DialogInterface dia,int whichButton){}
+                        }).create();
+                dia.show();
             }
         });
 
-        holder.entity.setOnClickListener(new View.OnClickListener() {
+        holder.tv_entity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,"entity",Toast.LENGTH_LONG).show();
             }
         });
 
-        holder.update.setOnClickListener(new View.OnClickListener() {
+        holder.tv_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(context,"update",Toast.LENGTH_LONG).show();
@@ -167,28 +193,29 @@ public class MyFile_Adapter extends BaseAdapter {
 
     static class ViewHolder {
 
-        ImageView icon;
-        TextView title;
-        TextView info;
-        ImageView action;
-        TextView date;
-        TextView open, update, delete, entity;
+        ImageView iv_file_icon;
+        TextView tv_title;
+        TextView tv_info;
+        ImageView iv_action;
+        TextView tv_date;
+
+        TextView tv_open, tv_update, tv_delete, tv_entity;
         LinearLayout ll_hide;
         int id;
 
 
         public ViewHolder(View v) {
-            icon = (ImageView) v.findViewById(R.id.imageView_icon);
-            title = (TextView) v.findViewById(R.id.textView_name);
-            info = (TextView) v.findViewById(R.id.textView_info);
-            date = (TextView) v.findViewById(R.id.textView_date);
-            action = (ImageView) v.findViewById(R.id.imageButton_action);
+            iv_file_icon = (ImageView) v.findViewById(R.id.imageView_icon);
+            tv_title = (TextView) v.findViewById(R.id.textView_name);
+            tv_info = (TextView) v.findViewById(R.id.textView_info);
+            tv_date = (TextView) v.findViewById(R.id.textView_date);
+            iv_action = (ImageView) v.findViewById(R.id.imageButton_action);
 
 
-            open = (TextView) v.findViewById(R.id.open);
-            update = (TextView) v.findViewById(R.id.update);
-            delete = (TextView) v.findViewById(R.id.delete);
-            entity = (TextView) v.findViewById(R.id.entity);
+            tv_open = (TextView) v.findViewById(R.id.open);
+            tv_update = (TextView) v.findViewById(R.id.update);
+            tv_delete = (TextView) v.findViewById(R.id.delete);
+            tv_entity = (TextView) v.findViewById(R.id.entity);
             ll_hide = (LinearLayout) v.findViewById(R.id.ll_hide);
 
             id = counter++;
@@ -199,11 +226,11 @@ public class MyFile_Adapter extends BaseAdapter {
 
         public void bindData(File file) {
 
-            title.setText(file.getName());
+            tv_title.setText(file.getName());
 
-            info.setText(formatFileSize(getFileSize(file)));
+            tv_info.setText(formatFileSize(getFileSize(file)));
 
-            date.setText(getDate(file));
+            tv_date.setText(getDate(file));
         }
 
 

@@ -25,7 +25,7 @@
             app:srcCompat="@mipmap/ic_launcher" />
 
         <ImageView
-            android:id="@+id/make_mode"
+            android:id="@+id/make_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
@@ -37,9 +37,9 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/make_mode"
-            android:layout_alignStart="@+id/make_mode"
-            android:layout_below="@+id/make_mode"
+            android:layout_alignEnd="@+id/make_model"
+            android:layout_alignStart="@+id/make_model"
+            android:layout_below="@+id/make_model"
             android:text="@string/open_mode" />
 
         <TextView

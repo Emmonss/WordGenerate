@@ -31,6 +31,7 @@
         <activity android:name=".Initialize_Activity" />
         <activity android:name=".Word_Relative_List_Activity" />
         <activity android:name=".Html_show_Activity" />
+        <activity android:name=".Model_Relative_List_Activity" />
     </application>
 
 </manifest>
