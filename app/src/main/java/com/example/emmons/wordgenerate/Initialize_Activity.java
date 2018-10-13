@@ -20,9 +20,15 @@ import android.widget.Toast;
 
 import com.example.emmons.utils.FileUtils;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 /**
  * Created by Emmons on 2018/8/31 0031.
@@ -82,14 +88,12 @@ public class Initialize_Activity extends AppCompatActivity {
 
     //查看目标文件夹是否创建
     private void get_File_Path(File appDir){
-        if (!appDir.exists()) {
+        if (!appDir.exists())
             appDir.mkdir();
 
-            notifySystemToScan(appDir);
-            //Toast.makeText(Initialize_Activity.this,FILE_PATH_NAME+"创建成功",Toast.LENGTH_LONG).show();
-        }
         add_Default_File(FILE_PATH_NAME);
         add_Mode_File(FILE_PATH_NAME);
+        notifySystemToScan(appDir);
     }
 
     private void add_Default_File(String path){
@@ -121,11 +125,13 @@ public class Initialize_Activity extends AppCompatActivity {
         if (!default_file.exists())
             default_file.mkdir();
 
-        get_Mode1(FILE_PATH_NAME + "/mode/");
-        notifySystemToScan(default_file);
+        //添加一号模板
+        get_Mode1_1(FILE_PATH_NAME + "/mode/");
+
+
     }
 
-    private void get_Mode1(String model_path){
+    private void get_Mode1_1(String model_path){
         try {
             String model = model_path + "/隐患整改通知/";
             File default_dir = new File(Environment.getExternalStorageDirectory(), model);
@@ -133,7 +139,7 @@ public class Initialize_Activity extends AppCompatActivity {
                 default_dir.mkdir();
 
             String default_file_doc = model + "demo.doc";
-            String company_name = model + "Companyname.dic";
+            String company_name = model + "companyname.txt";
 
             File default_file = new File(Environment.getExternalStorageDirectory(), default_file_doc);
             File COMName = new File(Environment.getExternalStorageDirectory(), company_name);
@@ -142,8 +148,8 @@ public class Initialize_Activity extends AppCompatActivity {
                 FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), inputStream);
             }
             if (!COMName.exists()) {
-                InputStream inputStream = getAssets().open("companyname.dic");
-                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), inputStream);
+                COMName.createNewFile();
+                Write_TXT(COMName,"companyname.txt");
             }
         }
         catch (Exception err){
@@ -168,7 +174,29 @@ public class Initialize_Activity extends AppCompatActivity {
     }
 
 
+    public void Write_TXT(File outfile, String inpath){
+        try {
+            BufferedWriter bw = new BufferedWriter(new FileWriter(outfile));
 
+            InputStreamReader inputReader = new InputStreamReader(getResources().getAssets().open("comname.txt"));
+            BufferedReader bufReader = new BufferedReader(inputReader);
+            String line = "";
+            String Result = "";
+            while ((line = bufReader.readLine()) != null) {
+                Result = line;
+                Result += "\n";
+                bw.write(Result);
+                bw.flush();
+            }
+
+            bw.close();
+            inputReader.close();
+            bufReader.close();
+        }
+        catch (Exception err){
+            Log.e("file",err.toString());
+        }
+    }
 
     //获得手机相机和图册的权限
     private void get_SDcard_permission()
