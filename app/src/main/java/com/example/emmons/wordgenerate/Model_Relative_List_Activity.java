@@ -34,7 +34,7 @@ public class Model_Relative_List_Activity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.model_listView);
         // 获得外部存储的路径
         Intent intent=getIntent();
-        String stringValue=intent.getStringExtra("path")+"/model/";
+        String stringValue=intent.getStringExtra("path")+"/mode/";
         File path = new File(Environment.getExternalStorageDirectory(), stringValue);
         File[] files = path.listFiles(new FileFilter() {
             // 实现之接口

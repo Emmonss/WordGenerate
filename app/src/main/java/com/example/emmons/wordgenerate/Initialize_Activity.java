@@ -13,11 +13,16 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.emmons.utils.FileUtils;
+
 import java.io.File;
+import java.io.FileFilter;
+import java.io.InputStream;
 
 /**
  * Created by Emmons on 2018/8/31 0031.
@@ -37,6 +42,7 @@ public class Initialize_Activity extends AppCompatActivity {
 
         File appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
         get_SDcard_permission();
+
         get_File_Path(appDir);
 
 
@@ -76,14 +82,76 @@ public class Initialize_Activity extends AppCompatActivity {
 
     //查看目标文件夹是否创建
     private void get_File_Path(File appDir){
-
         if (!appDir.exists()) {
             appDir.mkdir();
+
             notifySystemToScan(appDir);
             //Toast.makeText(Initialize_Activity.this,FILE_PATH_NAME+"创建成功",Toast.LENGTH_LONG).show();
         }
+        add_Default_File(FILE_PATH_NAME);
+        add_Mode_File(FILE_PATH_NAME);
     }
 
+    private void add_Default_File(String path){
+        try {
+            File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/file/");
+            String default_file_doc = path+"/file/1.doc";
+            if (!default_file.exists())
+                default_file.mkdir();
+            File[] list = default_file.listFiles(new FileFilter() {
+                public boolean accept(File file) {
+                    return file.getName().endsWith(".doc");
+                }
+            });
+
+            if(list.length==0){
+                InputStream inputStream = getAssets().open("1.doc");
+                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(),default_file_doc), inputStream);
+            }
+            notifySystemToScan(default_file);
+        }
+        catch (Exception err){
+            Log.e("file",err.toString());
+        }
+    }
+
+
+    private void add_Mode_File(String path){
+        File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/mode/");
+        if (!default_file.exists())
+            default_file.mkdir();
+
+        get_Mode1(FILE_PATH_NAME + "/mode/");
+        notifySystemToScan(default_file);
+    }
+
+    private void get_Mode1(String model_path){
+        try {
+            String model = model_path + "/隐患整改通知/";
+            File default_dir = new File(Environment.getExternalStorageDirectory(), model);
+            if (!default_dir.exists())
+                default_dir.mkdir();
+
+            String default_file_doc = model + "demo.doc";
+            String company_name = model + "Companyname.dic";
+
+            File default_file = new File(Environment.getExternalStorageDirectory(), default_file_doc);
+            File COMName = new File(Environment.getExternalStorageDirectory(), company_name);
+            if (!default_file.exists()) {
+                InputStream inputStream = getAssets().open("隐患整改通知.doc");
+                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), inputStream);
+            }
+            if (!COMName.exists()) {
+                InputStream inputStream = getAssets().open("companyname.dic");
+                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), inputStream);
+            }
+        }
+        catch (Exception err){
+            Log.e("file",err.toString());
+        }
+
+
+    }
     //广播创建的文件
     private void notifySystemToScan(File file) {
         try {
