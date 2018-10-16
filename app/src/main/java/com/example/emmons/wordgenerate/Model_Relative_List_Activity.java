@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -52,5 +54,17 @@ public class Model_Relative_List_Activity extends AppCompatActivity {
             //Toast.makeText(Model_Relative_List_Activity.this,files[0].getName(),Toast.LENGTH_LONG).show();
         }
         listView.setAdapter(fileAdapter);
+
+
+        listView.setOnItemClickListener(
+                new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Intent intent = new Intent(Model_Relative_List_Activity.this,Info_Edit_Activity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
     }
 }

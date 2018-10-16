@@ -1,6 +1,7 @@
 package com.example.emmons.wordgenerate;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,6 +64,14 @@ public class Model_Adapter extends BaseAdapter {
         }
         // 加载数据
         holder.bindData(files[i]);
+
+//        holder.iv_model_next.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
         return convertView;
     }
 

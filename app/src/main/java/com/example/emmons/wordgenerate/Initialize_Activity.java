@@ -1,10 +1,11 @@
 package com.example.emmons.wordgenerate;
+/**
+ * Created by Emmons on 2018/8/31 0031.
+ */
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,20 +20,16 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.emmons.utils.FileUtils;
+import com.example.emmons.Model.Model_YinHuan;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileFilter;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStream;
 
-/**
- * Created by Emmons on 2018/8/31 0031.
- */
+
+
 
 public class Initialize_Activity extends AppCompatActivity {
     public static final int REQUEST_PERMISSION_CODE = 1;
@@ -124,40 +121,22 @@ public class Initialize_Activity extends AppCompatActivity {
         File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/mode/");
         if (!default_file.exists())
             default_file.mkdir();
-
-        //添加一号模板
-        get_Mode1_1(FILE_PATH_NAME + "/mode/");
-
-
-    }
-
-    private void get_Mode1_1(String model_path){
         try {
-            String model = model_path + "/隐患整改通知/";
-            File default_dir = new File(Environment.getExternalStorageDirectory(), model);
-            if (!default_dir.exists())
-                default_dir.mkdir();
-
-            String default_file_doc = model + "demo.doc";
-            String company_name = model + "companyname.txt";
-
-            File default_file = new File(Environment.getExternalStorageDirectory(), default_file_doc);
-            File COMName = new File(Environment.getExternalStorageDirectory(), company_name);
-            if (!default_file.exists()) {
-                InputStream inputStream = getAssets().open("隐患整改通知.doc");
-                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), inputStream);
-            }
-            if (!COMName.exists()) {
-                COMName.createNewFile();
-                Write_TXT(COMName,"companyname.txt");
-            }
+            InputStream model_yinhuan_mode = getAssets().open("隐患整改通知.doc");
+            InputStreamReader model_yinhuan_comname = new InputStreamReader(getResources().getAssets().open("comname.txt"));
+            //添加一号模板
+            new Model_YinHuan(FILE_PATH_NAME + "/mode/",model_yinhuan_mode,model_yinhuan_comname);
         }
         catch (Exception err){
             Log.e("file",err.toString());
         }
 
+        //get_Mode1_1(FILE_PATH_NAME + "/mode/");
+
 
     }
+
+
     //广播创建的文件
     private void notifySystemToScan(File file) {
         try {
@@ -174,29 +153,7 @@ public class Initialize_Activity extends AppCompatActivity {
     }
 
 
-    public void Write_TXT(File outfile, String inpath){
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outfile));
 
-            InputStreamReader inputReader = new InputStreamReader(getResources().getAssets().open("comname.txt"));
-            BufferedReader bufReader = new BufferedReader(inputReader);
-            String line = "";
-            String Result = "";
-            while ((line = bufReader.readLine()) != null) {
-                Result = line;
-                Result += "\n";
-                bw.write(Result);
-                bw.flush();
-            }
-
-            bw.close();
-            inputReader.close();
-            bufReader.close();
-        }
-        catch (Exception err){
-            Log.e("file",err.toString());
-        }
-    }
 
     //获得手机相机和图册的权限
     private void get_SDcard_permission()
