@@ -76,7 +76,6 @@ public class Initialize_Activity extends AppCompatActivity {
 
     }
 
-
     private void Make_Model(){
         Intent intent = new Intent(Initialize_Activity.this,Model_Relative_List_Activity.class);
         intent.putExtra("path",FILE_PATH_NAME);
@@ -123,9 +122,9 @@ public class Initialize_Activity extends AppCompatActivity {
             default_file.mkdir();
         try {
             InputStream model_yinhuan_mode = getAssets().open("隐患整改通知.doc");
-            InputStreamReader model_yinhuan_comname = new InputStreamReader(getResources().getAssets().open("comname.txt"));
+            InputStream model_yinhuan_comname = getAssets().open("comname.db");
             //添加一号模板
-            new Model_YinHuan(FILE_PATH_NAME + "/mode/",model_yinhuan_mode,model_yinhuan_comname);
+            new Model_YinHuan(Initialize_Activity.this,FILE_PATH_NAME + "/mode/",model_yinhuan_mode,model_yinhuan_comname);
         }
         catch (Exception err){
             Log.e("file",err.toString());

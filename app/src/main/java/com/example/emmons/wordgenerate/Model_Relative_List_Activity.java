@@ -9,6 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+
+import com.example.emmons.wordgenerate.Adapter.Model_Adapter;
 import java.io.File;
 import java.io.FileFilter;
 
@@ -22,6 +24,8 @@ public class Model_Relative_List_Activity extends AppCompatActivity {
     Model_Adapter fileAdapter;
 
     File[] data;
+
+    String stringValue;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +40,7 @@ public class Model_Relative_List_Activity extends AppCompatActivity {
         listView = (ListView) findViewById(R.id.model_listView);
         // 获得外部存储的路径
         Intent intent=getIntent();
-        String stringValue=intent.getStringExtra("path")+"/mode/";
+        stringValue=intent.getStringExtra("path")+"/mode/";
         File path = new File(Environment.getExternalStorageDirectory(), stringValue);
         File[] files = path.listFiles(new FileFilter() {
             // 实现之接口
@@ -61,6 +65,7 @@ public class Model_Relative_List_Activity extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                         Intent intent = new Intent(Model_Relative_List_Activity.this,Info_Edit_Activity.class);
+                        intent.putExtra("path",Environment.getExternalStorageDirectory()+"/"+stringValue);
                         startActivity(intent);
                     }
                 }

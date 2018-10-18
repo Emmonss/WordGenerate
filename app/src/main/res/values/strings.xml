@@ -28,15 +28,27 @@
     <string name="minute">分</string>
 
 
+    <string name="Yinhuan_title">标题</string>
+    <string name="Yinhuan_title_hint">请输入标题：</string>
 
     <string name="Yinhuan_XiangMuBu">项目部</string>
     <string name="Yinhuan_XiangMuBu_hint">请输入项目部的名称：</string>
-    <string name="Yinhuan_Gongchen">工程名</string>
-    <string name="Yinhuan_GongCheng_hint">工程承包项目名称：</string>
+
+
+    <string name="Yinhuan_AnYinZiHao">第X号</string>
+    <string name="Yinhuan_AnYinZiHao_hint">xxxx号</string>
+    <string name="Yinhuan_AnYinZi">安隐字</string>
+    <string name="Yinhuan_AnYinZi_hint">字</string>
+
     <string name="Yinhuan_XIanDingDate">限定时间</string>
     <string name="Yinhuan_QianfaDate">签发时间</string>
     <string name="Yinhuan_ZhenggaiDate">整改时间</string>
     <string name="Yinhuan_FujianDate">复检时间</string>
+
+
+
+    <string name="Yinhuan_Add_Item_hint">请输入公司名，不要超过20个字：</string>
+
 
 
 

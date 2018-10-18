@@ -33,6 +33,9 @@
         <activity android:name=".Html_show_Activity" />
         <activity android:name=".Model_Relative_List_Activity" />
         <activity android:name=".Info_Edit_Activity" />
+        <activity android:name=".ComName_List_Activity" />
+        <activity android:name=".Add_new_Item_Activity" />
+
     </application>
 
 </manifest>

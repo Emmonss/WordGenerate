@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="background">#FFFFFF</color>
-    <color name="split_line">#11112233</color>
+    <color name="split_line">#112233</color>
 
 
     <color name="title_green">#2BD5D5</color>
@@ -12,7 +12,7 @@
     <color name="black">#000000</color>
     <color name="light_green">#59B29C</color>
     <color name="gray">#333333</color>
-
+    <color name="red">#FF0000</color>
     <color name="color1">#F0F0F0</color>
     <color name="white">#FFFFFF</color>
 

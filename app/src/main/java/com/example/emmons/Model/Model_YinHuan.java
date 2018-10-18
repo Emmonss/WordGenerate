@@ -1,5 +1,6 @@
 package com.example.emmons.Model;
 
+import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
@@ -8,6 +9,7 @@ import com.example.emmons.utils.FileUtils;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,8 +22,10 @@ import java.io.InputStreamReader;
 public class Model_YinHuan {
     private String path;
     private InputStream mode;
-    private InputStreamReader comname;
-    public  Model_YinHuan(String path,InputStream mode,InputStreamReader comname){
+    private InputStream comname;
+    private Context context;
+    public  Model_YinHuan(Context context,String path,InputStream mode,InputStream comname){
+        this.context = context;
         this.comname = comname;
         this.path = path;
         this.mode = mode;
@@ -37,7 +41,7 @@ public class Model_YinHuan {
                 default_dir.mkdir();
 
             String default_file_doc = model + "demo.doc";
-            String company_name = model + "companyname.txt";
+            String company_name = model + "companyname.db";
 
             File default_file = new File(Environment.getExternalStorageDirectory(), default_file_doc);
             File COMName = new File(Environment.getExternalStorageDirectory(), company_name);
@@ -46,7 +50,7 @@ public class Model_YinHuan {
 
             if (!COMName.exists()) {
                 COMName.createNewFile();
-                Write_TXT(COMName,"companyname.txt");
+                Write_TXT(COMName);
             }
         }
         catch (Exception err){
@@ -54,21 +58,16 @@ public class Model_YinHuan {
         }
     }
 
-    public void Write_TXT(File outfile, String inpath){
+    public void Write_TXT(File outfile){
         try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(outfile));
-            BufferedReader bufReader = new BufferedReader(comname);
-            String line = "";
-            String Result = "";
-            while ((line = bufReader.readLine()) != null) {
-                Result = line;
-                Result += "\n";
-                bw.write(Result);
-                bw.flush();
-            }
-            bw.close();
-            comname.close();
-            bufReader.close();
+            FileOutputStream out = new FileOutputStream(outfile);
+            InputStream in = comname;
+            byte[] buffer = new byte[1024];
+            int readBytes = 0;
+            while ((readBytes = in.read(buffer)) != -1)
+                out.write(buffer, 0, readBytes);
+            in.close();
+            out.close();
         }
         catch (Exception err){
             Log.e("file",err.toString());

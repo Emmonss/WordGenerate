@@ -1,4 +1,7 @@
-package com.example.emmons.wordgenerate;
+package com.example.emmons.wordgenerate.Adapter;
+
+
+import com.example.emmons.wordgenerate.R;
 
 import android.content.Context;
 import android.content.Intent;

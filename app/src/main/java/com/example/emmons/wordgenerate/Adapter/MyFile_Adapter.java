@@ -1,4 +1,4 @@
-package com.example.emmons.wordgenerate;
+package com.example.emmons.wordgenerate.Adapter;
 
 import com.example.emmons.Function.Common_Fuction;
 
@@ -18,6 +18,9 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.emmons.wordgenerate.R;
+import com.example.emmons.wordgenerate.Html_show_Activity;
 
 import java.io.File;
 import java.io.FileInputStream;

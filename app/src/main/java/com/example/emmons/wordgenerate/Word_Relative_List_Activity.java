@@ -12,6 +12,8 @@ import android.widget.Toast;
 import java.io.File;
 import java.io.FileFilter;
 
+import com.example.emmons.wordgenerate.Adapter.MyFile_Adapter;
+
 public class Word_Relative_List_Activity extends AppCompatActivity {
 
     ListView listView;
