@@ -3,9 +3,14 @@ package com.example.emmons.wordgenerate.Adapter;
 import com.example.emmons.Function.Common_Fuction;
 
 import android.app.Dialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.os.Environment;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -153,10 +158,12 @@ public class MyFile_Adapter extends BaseAdapter {
         holder.tv_open.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String path = getItem(i).getPath();
-                Intent intent = new Intent(context,Html_show_Activity.class);
-                intent.putExtra("path",path);
-                context.startActivity(intent);
+                String path = Environment.getExternalStorageDirectory()+"/WordGenerate/file/"+getItem(i).getName();
+                //final String newPath =Environment.getExternalStorageDirectory()+"/doc/testS.doc";
+//                Intent intent = new Intent(context,Html_show_Activity.class);
+//                intent.putExtra("path",path);
+//                context.startActivity(intent);
+                doOpenWord(path);
                 //Toast.makeText(context,"打开："+path,Toast.LENGTH_LONG).show();
             }
         });
@@ -275,6 +282,29 @@ public class MyFile_Adapter extends BaseAdapter {
         }
     }
 
-
+    private void doOpenWord(String newPath){
+        Uri uri= null;
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        intent.addCategory("android.intent.category.DEFAULT");
+        String fileMimeType = "application/msword";
+        Log.e("file_file",newPath);
+        if (Build.VERSION.SDK_INT >= 24) {
+            uri = FileProvider.getUriForFile(context, "com.example.emmons.wordgenerate.fileprovider", new File(newPath));
+        } else {
+            uri = Uri.fromFile(new File(newPath));
+        }
+        Log.e("file_uri",uri.getPath());
+        //Uri uri = FileProvider.getUriForFile(context, "com.example.emmons.wordgenerate.fileprovider", new File(newPath));
+        intent.setDataAndType(uri, fileMimeType);
+//        intent.setDataAndType(Uri.fromFile(new File(newPath)), fileMimeType);
+        try{
+            context.startActivity(intent);
+        } catch(ActivityNotFoundException e) {
+            //检测到系统尚未安装OliveOffice的apk程序
+            Toast.makeText(context, "未找到软件", Toast.LENGTH_LONG).show();
+            //请先到www.olivephone.com/e.apk下载并安装
+        }
+    }
 
 }
