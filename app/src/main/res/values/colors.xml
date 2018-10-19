@@ -8,6 +8,8 @@
 
 
     <color name="title_green">#2BD5D5</color>
+    <color name="light_white">#F5F5F5</color>
+    <color name="light_gray">#888888</color>
 
     <color name="black">#000000</color>
     <color name="light_green">#59B29C</color>
@@ -20,4 +22,6 @@
     <color name="color3">#B0B0B0</color>
     <color name="color4">#666666</color>
     <color name="color5">#57C5E8</color>
+
+
 </resources>

@@ -49,8 +49,11 @@
 
     <string name="Yinhuan_Add_Item_hint">请输入公司名，不要超过20个字：</string>
 
+    <string name="Yinhuan_Add_Yinhuan_hint">单击添加隐患:</string>
+    <string name="Yinhuan_Add_Yinhuan_hint2">请输入隐患:</string>
 
-
+    <string name="pic_item_tv_camera">拍照</string>
+    <string name="pic_item_tv_photo">从手机相册选择</string>
 
 
 </resources>

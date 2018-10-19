@@ -1,355 +1,426 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:isScrollContainer="true"
     android:background="@color/white">
-
-    <RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="50dp"
-        android:background="@color/title_green">
-
-        <ImageView
-            android:id="@+id/Yinhuan_iv_process_back"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="10dp"
-            android:src="@mipmap/back" />
-
-        <ImageView
-            android:id="@+id/Yinhuan_iv_process_save"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
-            android:layout_alignParentEnd="true"
-            android:layout_alignTop="@+id/Yinhuan_iv_process_back"
-            android:layout_marginEnd="20dp"
-            android:src="@mipmap/save" />
-    </RelativeLayout>
-
-    <!--标题-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_title"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_title"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_title"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/Yinhuan_et_edit_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center_vertical|end"
-            android:hint="@string/Yinhuan_title_hint"
-            android:singleLine="true"
-            android:paddingStart="1dp"
-            android:paddingEnd="1dp"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
-
-        <ImageView
-            android:id="@+id/Yinhuan_iv_delete_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/close" />
-
-    </LinearLayout>
-
-    <!--公司名-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_item_group_layout"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_departname"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_XiangMuBu"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/Yinhuan_et_edit_departname"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center_vertical|end"
-            android:hint="@string/Yinhuan_XiangMuBu_hint"
-            android:singleLine="true"
-            android:paddingStart="1dp"
-            android:paddingEnd="1dp"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
-
-        <ImageView
-            android:id="@+id/Yinhuan_iv_delete_departname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/close" />
-
-        <!--点击跳转或者弹出选择框-->
-        <ImageView
-            android:id="@+id/Yinhuan_iv_goto_departname"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_marginRight="7dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/jiantou_right" />
-
-    </LinearLayout>
-
-    <!--字号-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_yinzi"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_yinzi"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_AnYinZi"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_yinzi"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:hint="@string/Yinhuan_AnYinZi_hint"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_haozi"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_AnYinZiHao"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <EditText
-            android:id="@+id/et_edit_haozi"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="@null"
-            android:gravity="center_vertical|end"
-            android:hint="@string/Yinhuan_AnYinZiHao_hint"
-            android:singleLine="true"
-            android:paddingStart="1dp"
-            android:paddingEnd="1dp"
-            android:textColor="@color/black"
-            android:textSize="13sp" />
-
-        <ImageView
-            android:id="@+id/Yinhuan_iv_delete_companyname"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:padding="8dp"
-            android:scaleType="centerCrop"
-            android:src="@mipmap/close" />
-
-        <!--&lt;!&ndash;点击跳转或者弹出选择框&ndash;&gt;-->
-        <!--<ImageView-->
-            <!--android:id="@+id/Yinhuan_iv_goto_companyname"-->
-            <!--android:layout_width="30dp"-->
-            <!--android:layout_height="30dp"-->
-            <!--android:layout_marginRight="7dp"-->
-            <!--android:padding="8dp"-->
-            <!--android:scaleType="centerCrop"-->
-            <!--android:src="@mipmap/jiantou_right" />-->
-    </LinearLayout>
-
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scroll_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
-        android:background="#F5F5F5">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        android:background="@color/white">
 
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/title_green">
+
+            <ImageView
+                android:id="@+id/Yinhuan_iv_process_back"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="10dp"
+                android:src="@mipmap/back" />
+
+            <ImageView
+                android:id="@+id/Yinhuan_iv_process_save"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@+id/Yinhuan_iv_process_back"
+                android:layout_marginEnd="20dp"
+                android:src="@mipmap/save" />
+        </RelativeLayout>
+
+        <!--标题-->
         <LinearLayout
+            android:id="@+id/Yinhuan_ll_title"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_title"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_title"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/Yinhuan_et_edit_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical|end"
+                android:hint="@string/Yinhuan_title_hint"
+                android:singleLine="true"
+                android:paddingStart="1dp"
+                android:paddingEnd="1dp"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/Yinhuan_iv_delete_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/close" />
+
+        </LinearLayout>
+
+
+        <!--公司名-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_item_group_layout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_departname"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_XiangMuBu"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/Yinhuan_et_edit_departname"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical|end"
+                android:hint="@string/Yinhuan_XiangMuBu_hint"
+                android:singleLine="true"
+                android:paddingStart="1dp"
+                android:paddingEnd="1dp"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/Yinhuan_iv_delete_departname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/close" />
+
+            <!--点击跳转或者弹出选择框-->
+            <ImageView
+                android:id="@+id/Yinhuan_iv_goto_departname"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_marginRight="7dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/jiantou_right" />
+
+        </LinearLayout>
+
+        <!--字号-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_ll_yinzi"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_yinzi"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_AnYinZi"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_yinzi"
+                android:layout_width="120dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:hint="@string/Yinhuan_AnYinZi_hint"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_haozi"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_AnYinZiHao"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <EditText
+                android:id="@+id/et_edit_haozi"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                android:gravity="center_vertical|end"
+                android:hint="@string/Yinhuan_AnYinZiHao_hint"
+                android:singleLine="true"
+                android:paddingStart="1dp"
+                android:paddingEnd="1dp"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+
+            <ImageView
+                android:id="@+id/Yinhuan_iv_delete_companyname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:padding="8dp"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/close" />
+
+            <!--&lt;!&ndash;点击跳转或者弹出选择框&ndash;&gt;-->
+            <!--<ImageView-->
+                <!--android:id="@+id/Yinhuan_iv_goto_companyname"-->
+                <!--android:layout_width="30dp"-->
+                <!--android:layout_height="30dp"-->
+                <!--android:layout_marginRight="7dp"-->
+                <!--android:padding="8dp"-->
+                <!--android:scaleType="centerCrop"-->
+                <!--android:src="@mipmap/jiantou_right" />-->
+        </LinearLayout>
+
+        <!--添加隐患-->
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/Yinhuan_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="#F5F5F5">
 
             <LinearLayout
-                android:id="@+id/ll_vip_num_container"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="#F5F5F5">
-            </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/ll_add_vip_num"
+                <LinearLayout
+                    android:id="@+id/Yinhuan_ll_item_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#F5F5F5">
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/Yinhuan_ll_add_yinhuan_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:layout_marginTop="1dp"
+                    android:gravity="center_vertical"
+                    android:background="@drawable/bg_default_item_selector"
+                    android:paddingTop="12dp"
+                    android:paddingBottom="12dp"
+                    android:clickable="true">
+                    <ImageView
+                        android:layout_width="12dp"
+                        android:layout_height="12dp"
+                        android:src="@mipmap/item_add"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/Yinhuan_Add_Yinhuan_hint"
+                        android:textColor="@color/light_gray"
+                        android:layout_marginStart="12dp"/>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <!--限定时间-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_ll_limitdate"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_limitdate"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_XIanDingDate"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/Yinhuan_tv_limitdate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:layout_marginTop="1dp"
-                android:gravity="center_vertical"
-                android:background="@drawable/bg_default_item_selector"
-                android:paddingTop="12dp"
-                android:paddingBottom="12dp"
-                android:clickable="true">
-                <ImageView
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
-                    android:src="@mipmap/item_add"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="添加隐患条目"
-                    android:textColor="#888888"
-                    android:layout_marginLeft="12dp"/>
-            </LinearLayout>
+                android:gravity="center_horizontal"
+                android:textColor="@color/light_green"
+                android:textSize="15sp" />
         </LinearLayout>
-    </ScrollView>
 
-    <!--限定时间-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_limitdate"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_limitdate"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_XIanDingDate"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/Yinhuan_tv_limitdate"
+        <!--签发时间-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_ll_Singdate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/light_green"
-            android:textSize="15sp" />
-    </LinearLayout>
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-    <!--签发时间-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_Singdate"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_Singdate"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_QianfaDate"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_Singdate"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_QianfaDate"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/Yinhuan_tv_Singdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/light_green"
+                android:textSize="15sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_Singdate"
+        <!--整改时间-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_ll_ZhengGaidate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/light_green"
-            android:textSize="15sp" />
-    </LinearLayout>
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-    <!--整改时间-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_ZhengGaidate"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_ZhengGaidate"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_ZhenggaiDate"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_ZhengGaidate"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_ZhenggaiDate"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/Yinhuan_tv_ZhengGaidate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/light_green"
+                android:textSize="15sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_ZhengGaidate"
+        <!--复检时间-->
+        <LinearLayout
+            android:id="@+id/Yinhuan_ll_Fujiandate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/light_green"
-            android:textSize="15sp" />
-    </LinearLayout>
+            android:layout_height="45dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-    <!--复检时间-->
-    <LinearLayout
-        android:id="@+id/Yinhuan_ll_Fujiandate"
-        android:layout_width="match_parent"
-        android:layout_height="45dp"
-        android:background="@color/white"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/Yinhuan_tv_title_Fujiandate"
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="@string/Yinhuan_FujianDate"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_title_Fujiandate"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:text="@string/Yinhuan_FujianDate"
-            android:textColor="@color/black"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/Yinhuan_tv_Fujiandate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:textColor="@color/light_green"
+                android:textSize="15sp" />
+        </LinearLayout>
 
-        <TextView
-            android:id="@+id/Yinhuan_tv_Fujiandate"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:textColor="@color/light_green"
-            android:textSize="15sp" />
+            android:layout_height="30dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="60dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:text="添加图片"
+                android:textColor="@color/black"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/pic_item_activity_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:paddingBottom="16dp"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:paddingTop="16dp"
+            tools:context="cn.bluemobi.dylan.gridviewaddimage.MainActivity">
+            <GridView
+                android:layout_marginTop="10dp"
+                android:id="@+id/pic_item_gw"
+                android:numColumns="5"
+                android:columnWidth="66dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+        </LinearLayout>
+
+
+        <!--确定按钮-->
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:background="@color/white"
+            android:gravity="bottom"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/Yinhuan_bt_create_new_doc"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="start"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:background="@color/light_green"
+                android:text="@string/commit" />
+
+        </LinearLayout>
     </LinearLayout>
-
-
-
-</LinearLayout>
+</ScrollView>
