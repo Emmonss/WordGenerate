@@ -187,6 +187,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
                 map.put("$隐患$", "1"+(char)11+"2"+(char)11+"3");
                 writeDoc(demoFile,newFile,map);
                 new Common_Fuction().notifySystemToScan(Info_Edit_Activity.this,newFile);
+                finish();
             }
         });
     }
