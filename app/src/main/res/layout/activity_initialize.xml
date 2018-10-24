@@ -39,18 +39,19 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/make_model"
             android:layout_alignStart="@+id/make_model"
             android:layout_below="@+id/make_model"
+            android:layout_marginStart="10dp"
             android:text="@string/open_mode" />
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView"
             android:layout_alignBottom="@+id/textView"
-            android:layout_alignEnd="@+id/open_folder"
             android:layout_alignStart="@+id/open_folder"
+            android:layout_marginStart="7dp"
             android:text="@string/open_folder" />
     </RelativeLayout>
 </RelativeLayout>
