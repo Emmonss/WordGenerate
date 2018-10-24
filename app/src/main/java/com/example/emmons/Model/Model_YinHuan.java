@@ -4,17 +4,11 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-//import com.example.emmons.utils.FileUtils;
-
 import com.example.emmons.Function.Common_Fuction;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.InputStream;
-import java.io.InputStreamReader;
+
 
 /**
  * Created by Emmons on 2018/10/15 0015.

@@ -7,16 +7,12 @@ import android.util.Log;
 
 import com.example.emmons.wordgenerate.Adapter.Person;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Emmons on 2018/10/16 0016.
+ * 公司名称数据库类
  */
 
 public class YinHuan_Company_List {
@@ -39,13 +35,6 @@ public class YinHuan_Company_List {
             db = SQLiteDatabase.openOrCreateDatabase(path, null);
             db.execSQL("CREATE TABLE IF NOT EXISTS "+Table_Name+"(" + ComName+" text primary key autoincrement" + ")");
             find();
-//            InputStream ins= new FileInputStream(new File(path));
-//            BufferedReader bufReader = new BufferedReader(new InputStreamReader(ins));
-//            String line;
-//            while((line=bufReader.readLine())!=null)
-//                CompanyName.add(line);
-//            ins.close();
-//            bufReader.close();
         }
         catch (Exception err){
             Log.e("file",err.toString());

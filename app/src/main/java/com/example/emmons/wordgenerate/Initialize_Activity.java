@@ -21,7 +21,6 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.emmons.Function.Common_Fuction;
-import com.example.emmons.Function.replace_data;
 import com.example.emmons.Model.Model_YinHuan;
 
 import java.io.File;

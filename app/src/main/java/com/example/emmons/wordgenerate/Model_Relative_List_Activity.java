@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-
 import com.example.emmons.wordgenerate.Adapter.Model_Adapter;
 import java.io.File;
 import java.io.FileFilter;

@@ -9,7 +9,6 @@ import android.widget.CheckBox;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-
 import com.example.emmons.wordgenerate.R;
 import java.util.ArrayList;
 import java.util.List;
