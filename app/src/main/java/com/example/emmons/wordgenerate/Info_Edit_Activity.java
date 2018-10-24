@@ -1,10 +1,13 @@
 package com.example.emmons.wordgenerate;
 /**
  * Created by Emmons on 2018/10/15 0015.
+ * 隐患整改通知
  */
+
 import android.app.Dialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Point;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -30,7 +33,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.emmons.Function.Common_Fuction;
 import com.example.emmons.Model.YinHuan_Company_List;
 import com.example.emmons.wordgenerate.Adapter.GridViewAddImgesAdpter;
 import com.example.emmons.wordgenerate.WheelView.BottomDialog;
@@ -39,14 +41,10 @@ import com.example.emmons.wordgenerate.time.CustomDatePicker;
 
 import net.bither.util.NativeUtil;
 
-import org.apache.poi.hwpf.HWPFDocument;
-import org.apache.poi.hwpf.usermodel.Range;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -93,8 +91,12 @@ public class Info_Edit_Activity  extends AppCompatActivity {
     private final String PHOTO_FILE_NAME = "temp_photo.jpg";
 
     //save
-    private EditText Yinhuan_et_edit_title,Yinhuan_et_edit_departname,et_edit_haozi;
-    private TextView Yinhuan_tv_yinzi,Yinhuan_tv_limitdate,Yinhuan_tv_Singdate,Yinhuan_tv_ZhengGaidate,Yinhuan_tv_Fujiandate;
+    private EditText Yinhuan_et_edit_title,et_edit_haozi;
+
+
+    //delete
+    private ImageView iv_delete_title,iv_delete_departname,iv_delete_companyname,iv_process_back;
+
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,71 +144,99 @@ public class Info_Edit_Activity  extends AppCompatActivity {
 
 
 
-
         get_Yinzi();
+
         get_ComName();
+
         init_datepicker();
+
         get_LimtDate();
 
         get_add_pic();
+
         get_add_item();
 
-
         create();
+
+        delete();
     }
 
     public void create(){
         final String save_path = Environment.getExternalStorageDirectory()+"/WordGenerate/file/";
-        final String demopath = Environment.getExternalStorageDirectory()+"/WordGenerate/mode/隐患整改通知/demo.doc";
+        final String demopath = "隐患整改通知.docx";
 
 
         btnYes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String comname = et_depart.getText().toString();
-                String yinzi = tv_yinzi.getText().toString();
-                String LimitDate = tv_LimitDate.getText().toString();
-                String SigDate = tv_SigDate.getText().toString();
-                String ZGDate = tv_ZGDate.getText().toString();
-                String FJDate = tv_FJDate.getText().toString();
-                String edit_haozi = et_edit_haozi.getText().toString();
-                //获取模板文件
-                File demoFile=new File(demopath);
-                //创建生成的文件
-                File newFile=new File(save_path+Yinhuan_et_edit_title.getText().toString()+".doc");
 
-                Map<String, String> map = new HashMap<String, String>();
-                map.put("$项目部名称$", comname);
-                map.put("$工程名称$", "你项目");
-                map.put("$日期$", LimitDate);
-                map.put("$签发日期$", SigDate);
-                map.put("$整改日期$", ZGDate);
-                map.put("$复检日期$", FJDate);
-                map.put("$隐字$", yinzi);
-                map.put("$号$", edit_haozi);
-                map.put("$隐患$", "1"+(char)11+"2"+(char)11+"3");
-                writeDoc(demoFile,newFile,map);
-                new Common_Fuction().notifySystemToScan(Info_Edit_Activity.this,newFile);
-                finish();
+
+
+                Map<String, String> map =getMap();
+                List<String> yinhuan_list = getDataList();
+                //CheckMap(map);
+                if(CheckMap(map)) {
+                    //Toast.makeText(Info_Edit_Activity.this, "可以了", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(Info_Edit_Activity.this,Create_a_new_docx.class);
+                    intent.putExtra("map",(Serializable)map);
+                    intent.putExtra("yinhuan_list",(Serializable)yinhuan_list);
+                    intent.putExtra("pohto_path",(Serializable)pohto_path);
+                    startActivity(intent);
+
+                }
             }
         });
     }
 
+    public void delete(){
 
+        //Yinhuan_iv_delete_title,Yinhuan_iv_delete_departname,Yinhuan_iv_delete_companyname;
+        iv_delete_title = (ImageView)findViewById(R.id.Yinhuan_iv_delete_title);
+        iv_delete_departname = (ImageView)findViewById(R.id.Yinhuan_iv_delete_departname);
+        iv_delete_companyname = (ImageView)findViewById(R.id.Yinhuan_iv_delete_companyname);
+        iv_process_back  = (ImageView)findViewById(R.id.Yinhuan_iv_process_back);
+
+        //标题删除
+        iv_delete_title.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Yinhuan_et_edit_title.setText("");
+            }
+        });
+
+        //公司名删除
+        iv_delete_departname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_depart.setText("");
+            }
+        });
+
+        //号删除
+        iv_delete_companyname.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_edit_haozi.setText("");
+            }
+        });
+
+        iv_process_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+    }
     //添加图片
     private void get_add_pic(){
         datas = new ArrayList<>();
         gridViewAddImgesAdpter = new GridViewAddImgesAdpter(datas, this);
 
-
         File dir = new File(IMAGE_DIR);
-        if (!dir.exists()) {
+        if (!dir.exists())
             dir.mkdir();
-        }
-        else
-        {
-            new Common_Fuction().deleteFile(this,dir);
-        }
 
         gw.setAdapter(gridViewAddImgesAdpter);
         gw.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -230,7 +260,9 @@ public class Info_Edit_Activity  extends AppCompatActivity {
         WindowManager windowManager = getWindowManager();
         Display display = windowManager.getDefaultDisplay();
         WindowManager.LayoutParams lp = dialog.getWindow().getAttributes();
-        lp.width = display.getWidth(); // 设置宽度
+        Point size =new Point();
+        display.getSize(size);
+        lp.width = size.x; // 设置宽度
         dialog.getWindow().setAttributes(lp);
         dialog.show();
         tv_cancel.setOnClickListener(new View.OnClickListener() {
@@ -338,34 +370,18 @@ public class Info_Edit_Activity  extends AppCompatActivity {
 
     }
 
-    private List<String> getDataList() {
-        List<String> result = new ArrayList<>();
-        for (int i = 0; i < ll_yinhuan_Container.getChildCount(); i++) {
-            View itemView = ll_yinhuan_Container.getChildAt(i);
-            EditText et = (EditText) itemView.findViewById(R.id.Yinhuan_et_yinhuan_item);
-            if (et != null) {
-                String vipNum = et.getText().toString().trim();
-                if (!TextUtils.isEmpty(vipNum)) {
-                    result.add(vipNum);
-                }
-            }
-        }
-        return result;
-    }
-
     private void sortViewItem(){
         for(int i = 0; i < ll_yinhuan_Container.getChildCount(); i++){
             final View viewItem = ll_yinhuan_Container.getChildAt(i);
             TextView tvIndex = (TextView)viewItem.findViewById(R.id.Yinhuan_tv_index);
             tvIndex.setText(String.valueOf(i+1));
-
         }
     }
 
 
 
-
     //安隐字
+    @SuppressWarnings("unchecked")
     private void get_Yinzi(){
 
         tv_yinzi.setOnClickListener(new View.OnClickListener() {
@@ -373,7 +389,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
             public void onClick(View view) {
                 View outerView1 = LayoutInflater.from(Info_Edit_Activity.this).inflate(R.layout.activity_pick_yinzi, null);
                 final WheelView wv1 = (WheelView) outerView1.findViewById(R.id.Yinhuan_yinzi_wheel);
-                wv1.setItems(getNumbers(2017,2022),0);
+                wv1.setItems(getNumbers(2018,2032),0);
 
                 TextView tv_ok = (TextView) outerView1.findViewById(R.id.Yinhuan_yinzi_ok);
                 TextView tv_cancel = (TextView) outerView1.findViewById(R.id.Yinhuan_yinzi_cancel);
@@ -441,6 +457,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
 
 
     }
+
     //日期选择器
     private void init_DatePicker(){
         //1
@@ -483,6 +500,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
         customDatePicker_FJDate.showSpecificTime(false); // 不显示时和分
         customDatePicker_FJDate.setIsLoop(false); // 不允许循环滚动
     }
+
     //添加各类日期监听事件
     private void get_LimtDate(){
         tv_LimitDate.setOnClickListener(new View.OnClickListener() {
@@ -515,6 +533,15 @@ public class Info_Edit_Activity  extends AppCompatActivity {
         });
     }
 
+    //日期规范
+    private String date_normalize(String date){
+        String[] da = date.split("-");
+        if(da.length>=3)
+            return da[0]+"年"+da[1]+"月"+da[2]+"日";
+        else
+            return date;
+    }
+
     //安隐字号选择
     private ArrayList getNumbers( int start,int end) {
         ArrayList<String> list = new ArrayList<>();
@@ -541,7 +568,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
                     Uri uri = data.getData();
                     String[] proj = {MediaStore.Images.Media.DATA};
                     //好像是android多媒体数据库的封装接口，具体的看Android文档
-                    Cursor cursor = managedQuery(uri, proj, null, null, null);
+                    Cursor cursor = getContentResolver().query(uri, proj, null, null, null);
                     //按我个人理解 这个是获得用户选择的图片的索引值
                     int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
                     //将光标移至开头 ，这个很重要，不小心很容易引起越界
@@ -628,38 +655,66 @@ public class Info_Edit_Activity  extends AppCompatActivity {
         gridViewAddImgesAdpter.notifyDataSetChanged();
     }
 
-    public void writeDoc(File demoFile ,File newFile ,Map<String, String> map)
-    {
-        try
-        {
-            FileInputStream in = new FileInputStream(demoFile);
-            HWPFDocument hdt = new HWPFDocument(in);
-            // Fields fields = hdt.getFields();
-            // 读取word文本内容
-            Range range = hdt.getRange();
-            // System.out.println(range.text());
 
-            // 替换文本内容
-            for(Map.Entry<String, String> entry : map.entrySet())
-            {
-                range.replaceText(entry.getKey(), entry.getValue());
+    private List<String> getDataList() {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < ll_yinhuan_Container.getChildCount(); i++) {
+            View itemView = ll_yinhuan_Container.getChildAt(i);
+            int j = i+1;
+            EditText et = (EditText) itemView.findViewById(R.id.Yinhuan_et_yinhuan_item);
+            if (et != null) {
+                String vipNum = et.getText().toString().trim();
+                if (!TextUtils.isEmpty(vipNum)) {
+                    result.add(j+"."+vipNum);
+                }
             }
-            ByteArrayOutputStream ostream = new ByteArrayOutputStream();
-            FileOutputStream out = new FileOutputStream(newFile, true);
-            hdt.write(ostream);
-            // 输出字节流
-            out.write(ostream.toByteArray());
-            out.close();
-            ostream.close();
         }
-        catch(IOException e)
-        {
-            e.printStackTrace();
+        return result;
+    }
+
+    private Map<String, String> getMap() {
+        String comname = et_depart.getText().toString();
+        String yinzi = tv_yinzi.getText().toString();
+        String LimitDate =date_normalize( tv_LimitDate.getText().toString());
+        String SigDate =date_normalize(  tv_SigDate.getText().toString());
+        String ZGDate = date_normalize( tv_ZGDate.getText().toString());
+        String FJDate = date_normalize( tv_FJDate.getText().toString());
+        String edit_haozi = date_normalize( et_edit_haozi.getText().toString());
+        String docname = Yinhuan_et_edit_title.getText().toString();
+
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("文件名称",docname);
+        map.put("项目部名称", comname);
+        map.put("限定日期", LimitDate);
+        map.put("签发日期", SigDate);
+        map.put("整改日期", ZGDate);
+        map.put("复检日期", FJDate);
+        map.put("隐字", yinzi);
+        map.put("号", edit_haozi);
+
+        return map;
+
+    }
+
+    private boolean CheckMap(Map<String,String> map){
+        if(map.get("文件名称").equalsIgnoreCase("")){
+            Toast.makeText(Info_Edit_Activity.this, "请填写文件名", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        catch(Exception e)
-        {
-            e.printStackTrace();
+        if(map.get("项目部名称").equalsIgnoreCase("")){
+            Toast.makeText(Info_Edit_Activity.this, "请填写项目部名称", Toast.LENGTH_SHORT).show();
+            return false;
         }
+        if(map.get("隐字").equalsIgnoreCase("")){
+            Toast.makeText(Info_Edit_Activity.this, "请填写隐字", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if(map.get("号").equalsIgnoreCase("")){
+            Toast.makeText(Info_Edit_Activity.this, "请填写号", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        else
+            return true;
     }
 
 }

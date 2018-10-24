@@ -16,6 +16,7 @@ import java.io.File;
 
 /**
  * Created by Emmons on 2018/10/12 0012.
+ * 模型栏目生成器Adapter
  */
 
 public class Model_Adapter extends BaseAdapter {
@@ -51,29 +52,17 @@ public class Model_Adapter extends BaseAdapter {
     public View getView(int i, View convertView, ViewGroup viewGroup) {
         ViewHolder holder;
         if (convertView == null) {
-            // 没有可复用，需要创建
-            // 开销很大 加载文件、XML 解析 控件和布局的
+
             convertView = layoutInflater.inflate(R.layout.activity_model_item, null);
 
-            // 每个视图项需要一个 viewHolder
-            // 构造ViewHolder把View convertView传给它
             holder = new Model_Adapter.ViewHolder(convertView);
 
-            // 视图项关联了它的视图结构
             convertView.setTag(holder);
         } else {
-            // 有复用视图项，不创建，并直接获得结构
             holder = (Model_Adapter.ViewHolder) convertView.getTag();
         }
-        // 加载数据
-        holder.bindData(files[i]);
 
-//        holder.iv_model_next.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
+        holder.bindData(files[i]);
 
         return convertView;
     }
@@ -83,7 +72,6 @@ public class Model_Adapter extends BaseAdapter {
         TextView tv_model_name;
         ImageView iv_model_next;
         int id;
-
         public ViewHolder(View v){
             iv_model_icon = (ImageView)v.findViewById(R.id.iv_model_icon);
             tv_model_name = (TextView)v.findViewById(R.id.tv_model_name);

@@ -25,7 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.emmons.wordgenerate.R;
-import com.example.emmons.wordgenerate.Html_show_Activity;
+//import com.example.emmons.wordgenerate.Html_show_Activity;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -61,6 +61,7 @@ public class MyFile_Adapter extends BaseAdapter {
         layoutInflater = LayoutInflater.from(context);
 
     }
+
     public void delete_file(int i){
         List<File> l1 = new ArrayList<File>();
         for(int count = 0;count<this.files.length;count++)
@@ -159,12 +160,7 @@ public class MyFile_Adapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 String path = Environment.getExternalStorageDirectory()+"/WordGenerate/file/"+getItem(i).getName();
-                //final String newPath =Environment.getExternalStorageDirectory()+"/doc/testS.doc";
-//                Intent intent = new Intent(context,Html_show_Activity.class);
-//                intent.putExtra("path",path);
-//                context.startActivity(intent);
                 doOpenWord(path);
-                //Toast.makeText(context,"打开："+path,Toast.LENGTH_LONG).show();
             }
         });
 

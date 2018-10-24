@@ -18,9 +18,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * com.bm.falvzixun.adapter.GridViewAddImgAdpter
- *
- * @author yuandl on 2015/12/24.
  *         添加上传图片适配器
  */
 public class GridViewAddImgesAdpter extends BaseAdapter {
@@ -29,7 +26,7 @@ public class GridViewAddImgesAdpter extends BaseAdapter {
     private LayoutInflater inflater;
     /**
      * 可以动态设置最多上传几张，之后就不显示+号了，用户也无法上传了
-     * 默认9张
+     * 默认20张
      */
     private int maxImages = 20;
 

@@ -14,9 +14,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/first"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/first"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -44,7 +44,7 @@
 
         <activity android:name=".Initialize_Activity" />
         <activity android:name=".Word_Relative_List_Activity" />
-        <activity android:name=".Html_show_Activity" />
+        <activity android:name=".Create_a_new_docx" />
         <activity android:name=".Model_Relative_List_Activity" />
         <activity android:name=".Info_Edit_Activity" />
         <activity android:name=".ComName_List_Activity" />

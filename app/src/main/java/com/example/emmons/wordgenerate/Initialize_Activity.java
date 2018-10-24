@@ -1,6 +1,7 @@
 package com.example.emmons.wordgenerate;
 /**
  * Created by Emmons on 2018/8/31 0031.
+ * 初始化
  */
 
 import android.Manifest;
@@ -19,34 +20,36 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.emmons.utils.FileUtils;
+import com.example.emmons.Function.Common_Fuction;
+import com.example.emmons.Function.replace_data;
 import com.example.emmons.Model.Model_YinHuan;
-
 
 import java.io.File;
 import java.io.FileFilter;
+
 import java.io.InputStream;
-import java.io.InputStreamReader;
-
-
 
 
 public class Initialize_Activity extends AppCompatActivity {
     public static final int REQUEST_PERMISSION_CODE = 1;
     public String FILE_PATH_NAME = "WordGenerate";
 
-
+    private Common_Fuction cf;
     private ImageView iv_open_folder;
     private ImageView iv_open_model;
 
-    protected void onCreate(@Nullable Bundle savedInstanceState){
+
+    protected void onCreate(@Nullable final Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_initialize);
+
+        cf = new Common_Fuction();
 
         File appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
         get_SDcard_permission();
 
         get_File_Path(appDir);
+
 
 
         iv_open_folder = (ImageView)findViewById(R.id.open_folder);
@@ -69,6 +72,11 @@ public class Initialize_Activity extends AppCompatActivity {
         });
 
     }
+
+
+
+
+
     private void Open_Folder(){
         Intent intent = new Intent(Initialize_Activity.this,Word_Relative_List_Activity.class);
         intent.putExtra("path",FILE_PATH_NAME);
@@ -92,45 +100,50 @@ public class Initialize_Activity extends AppCompatActivity {
         notifySystemToScan(appDir);
     }
 
+    //添加默认文件夹
     private void add_Default_File(String path){
         try {
+            String default_path = Environment.getExternalStorageDirectory()+"/"+FILE_PATH_NAME + "/file/";
             File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/file/");
-            String default_file_doc = path+"/file/1.doc";
+            //Log.i("docx_1",default_file.getAbsolutePath());
+            String default_file_doc = default_path+"1.docx";
             if (!default_file.exists())
                 default_file.mkdir();
+
+            //如果默认文件夹没有文件，最有添加默认范例。
             File[] list = default_file.listFiles(new FileFilter() {
                 public boolean accept(File file) {
-                    return file.getName().endsWith(".doc");
+                    return file.getName().endsWith(".docx");
                 }
             });
 
             if(list.length==0){
-                InputStream inputStream = getAssets().open("1.doc");
-                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(),default_file_doc), inputStream);
+                InputStream inputStream = getAssets().open("1.docx");
+                cf.Write_TXT(new File(default_file_doc),inputStream);
+                //Log.i("docx_2",default_file_doc);
+                //FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(),default_file_doc), inputStream);
             }
-            notifySystemToScan(default_file);
         }
         catch (Exception err){
-            Log.e("file",err.toString());
+            //Log.e("docx_err",err.toString());
         }
     }
 
-
+    //添加模板
     private void add_Mode_File(String path){
         File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/mode/");
         if (!default_file.exists())
             default_file.mkdir();
         try {
-            InputStream model_yinhuan_mode = getAssets().open("隐患整改通知.doc");
             InputStream model_yinhuan_comname = getAssets().open("comname.db");
             //添加一号模板
-            new Model_YinHuan(Initialize_Activity.this,FILE_PATH_NAME + "/mode/",model_yinhuan_mode,model_yinhuan_comname);
+            new Model_YinHuan(Initialize_Activity.this,FILE_PATH_NAME + "/mode/",model_yinhuan_comname);
         }
         catch (Exception err){
             Log.e("file",err.toString());
         }
 
-        //get_Mode1_1(FILE_PATH_NAME + "/mode/");
+
 
 
     }
@@ -150,7 +163,7 @@ public class Initialize_Activity extends AppCompatActivity {
 //这里是context.sendBroadcast(intent);
 
     }
-
+//
 
 
 

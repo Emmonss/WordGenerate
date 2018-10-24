@@ -1,6 +1,10 @@
 package com.example.emmons.wordgenerate;
+/**
+ * Created by Emmons on 2018/10/18 0022.
+ * 初始类
+ */
 
-import android.app.ActionBar;
+
 import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;

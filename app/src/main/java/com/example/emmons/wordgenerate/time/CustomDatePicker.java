@@ -2,6 +2,7 @@ package com.example.emmons.wordgenerate.time;
 
 /**
  * Created by Emmons on 2018/10/16 0016.
+ * 时间选择器的View类
  */
 
 import android.animation.ObjectAnimator;
@@ -23,9 +24,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Locale;
 
-/**
- * Created by liuwan on 2016/9/28.
- */
 public class CustomDatePicker {
 
     /**
@@ -91,7 +89,7 @@ public class CustomDatePicker {
             datePickerDialog = new Dialog(context, R.style.time_dialog);
             datePickerDialog.setCancelable(false);
             datePickerDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            datePickerDialog.setContentView(R.layout.custom_date_picker);
+            datePickerDialog.setContentView(R.layout.activity_custom_date_picker);
             Window window = datePickerDialog.getWindow();
             window.setGravity(Gravity.BOTTOM);
             WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);

@@ -3,6 +3,7 @@ package com.example.emmons.Function;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.io.BufferedWriter;
@@ -10,10 +11,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStreamWriter;
 
 /**
  * Created by Emmons on 2018/9/28 0028.
+ * 处理文件的一些公共方法
  */
 
 public class Common_Fuction {
@@ -50,8 +53,8 @@ public class Common_Fuction {
         }
     }
 
-    //清空html
-    //清空html
+
+    //清空某一文件夹
     public void deleteFile(Context context,File file) {
         if (file.isDirectory()) {
             File[] files = file.listFiles();
@@ -66,6 +69,22 @@ public class Common_Fuction {
         notifySystemToScan(context,file);
     }
 
+    //写数据流
+    public void Write_TXT(File outfile,InputStream in){
+        try {
+            FileOutputStream out = new FileOutputStream(outfile);
+            byte[] buffer = new byte[1024];
+            int readBytes = 0;
+            while ((readBytes = in.read(buffer)) != -1)
+                out.write(buffer, 0, readBytes);
+            in.close();
+            out.close();
+        }
+        catch (Exception err){
+            Log.e("file",err.toString());
+        }
+    }
+
     //广播文件
     public void notifySystemToScan(Context context, File file) {
         try {
@@ -78,6 +97,7 @@ public class Common_Fuction {
         }
     }
 
+    //删掉某一文件
     public boolean deleteSingleFile(Context context,String filePath$Name) {
         File file = new File(filePath$Name);        // 如果文件路径所对应的文件存在，并且是一个文件，则直接删除
         if (file.exists() && file.isFile()) {

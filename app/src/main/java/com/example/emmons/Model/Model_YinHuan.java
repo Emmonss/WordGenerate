@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Environment;
 import android.util.Log;
 
-import com.example.emmons.utils.FileUtils;
+//import com.example.emmons.utils.FileUtils;
+
+import com.example.emmons.Function.Common_Fuction;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -24,15 +26,17 @@ public class Model_YinHuan {
     private InputStream mode;
     private InputStream comname;
     private Context context;
-    public  Model_YinHuan(Context context,String path,InputStream mode,InputStream comname){
+    private Common_Fuction cf;
+
+    public  Model_YinHuan(Context context,String path,InputStream comname){
         this.context = context;
         this.comname = comname;
         this.path = path;
-        this.mode = mode;
+        cf = new Common_Fuction();
         get_Mode1();
      }
 
-
+    //写入必要的数据库或者其他文件
     private void get_Mode1(){
         try {
             String model = path + "/隐患整改通知/";
@@ -40,17 +44,13 @@ public class Model_YinHuan {
             if (!default_dir.exists())
                 default_dir.mkdir();
 
-            String default_file_doc = model + "demo.doc";
             String company_name = model + "companyname.db";
 
-            File default_file = new File(Environment.getExternalStorageDirectory(), default_file_doc);
             File COMName = new File(Environment.getExternalStorageDirectory(), company_name);
-            if (!default_file.exists())
-                FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(), default_file_doc), mode);
 
             if (!COMName.exists()) {
                 COMName.createNewFile();
-                Write_TXT(COMName);
+                cf.Write_TXT(COMName,comname);
             }
         }
         catch (Exception err){
@@ -58,21 +58,7 @@ public class Model_YinHuan {
         }
     }
 
-    public void Write_TXT(File outfile){
-        try {
-            FileOutputStream out = new FileOutputStream(outfile);
-            InputStream in = comname;
-            byte[] buffer = new byte[1024];
-            int readBytes = 0;
-            while ((readBytes = in.read(buffer)) != -1)
-                out.write(buffer, 0, readBytes);
-            in.close();
-            out.close();
-        }
-        catch (Exception err){
-            Log.e("file",err.toString());
-        }
-    }
+
 
 
 }

@@ -23,6 +23,7 @@ import java.util.List;
 
 /**
  * Created by Emmons on 2018/10/16 0016.
+ * 隐患整改通知的公司名称列表
  */
 
 public class ComName_List_Activity extends AppCompatActivity {
@@ -56,16 +57,19 @@ public class ComName_List_Activity extends AppCompatActivity {
         Add_Item();
         Confirm_buttom();
         Delete_buttom();
-        //Toast.makeText(ComName_List_Activity.this,ReadList.getTest(),Toast.LENGTH_LONG).show();
+
     }
 
+    //初始化
+    @SuppressWarnings("unchecked")
     private void init_Listview(){
+
         cname = ReadList.get_List();
 
         cadapter = new ComName_Adapter(this,cname);
         Clist_view.setAdapter(cadapter);
 
-
+        //从数据库中抽取数据显示在列表上
         Clist_view.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             int currentNum = -1;
             @Override
@@ -98,6 +102,8 @@ public class ComName_List_Activity extends AppCompatActivity {
 
     }
 
+
+    //增加条目的监听器
     public void Add_Item(){
         Add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +114,7 @@ public class ComName_List_Activity extends AppCompatActivity {
         });
     }
 
+    //删除条目的监听器，并更新数据库
     private void Delete_buttom(){
         Delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,6 +139,7 @@ public class ComName_List_Activity extends AppCompatActivity {
         });
     }
 
+    //确定条目，返回数值。
     private void Confirm_buttom(){
         Confirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -151,6 +159,7 @@ public class ComName_List_Activity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //将增加条目返回值放到列表上并插入数据库
         if(requestCode == 1 && data != null){
             cname.add(new Person(data.getStringExtra("backString")));
             cadapter.setDatas(cname);

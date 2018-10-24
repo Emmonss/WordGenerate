@@ -27,14 +27,6 @@
                 android:layout_marginStart="10dp"
                 android:src="@mipmap/back" />
 
-            <ImageView
-                android:id="@+id/Yinhuan_iv_process_save"
-                android:layout_width="38dp"
-                android:layout_height="38dp"
-                android:layout_alignParentEnd="true"
-                android:layout_alignTop="@+id/Yinhuan_iv_process_back"
-                android:layout_marginEnd="20dp"
-                android:src="@mipmap/save" />
         </RelativeLayout>
 
         <!--标题-->
@@ -177,6 +169,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:gravity="center_vertical|end"
+                android:inputType="number|numberDecimal"
                 android:hint="@string/Yinhuan_AnYinZiHao_hint"
                 android:singleLine="true"
                 android:paddingStart="1dp"

@@ -80,10 +80,11 @@ public class Common {
         }
 
         //设置小时分钟
+        Calendar ca = Calendar.getInstance();
         Date timeFormat = timeFromCNStr(time);
         try{
-            calendar.set(Calendar.HOUR_OF_DAY,timeFormat.getHours());
-            calendar.set(Calendar.MINUTE,timeFormat.getMinutes());
+            calendar.set(Calendar.HOUR_OF_DAY,ca.get(Calendar.HOUR));
+            calendar.set(Calendar.MINUTE,ca.get(Calendar.MINUTE));
             dateTime = calendar.getTime();
         }catch (Exception e){
             e.printStackTrace();
@@ -149,7 +150,7 @@ public class Common {
         }
 
     }
-
+    @SuppressWarnings("unchecked")
     public static ArrayList buildHourListStart(TimeRange timeRange) {
         Date dateStart = timeRange.getStart_time();
         Calendar calendarStart = Calendar.getInstance();
@@ -177,6 +178,7 @@ public class Common {
 
         return hourList;
     }
+    @SuppressWarnings("unchecked")
     public static ArrayList buildNomalHourList() {
         ArrayList hourList = new ArrayList<>();
 
@@ -186,6 +188,7 @@ public class Common {
 
         return hourList;
     }
+    @SuppressWarnings("unchecked")
     public static ArrayList buildHourListEnd(TimeRange timeRange) {
         Date dateEnd = timeRange.getEnd_time();
         Calendar calendar = Calendar.getInstance();
@@ -201,7 +204,7 @@ public class Common {
 
         return hourList;
     }
-
+    @SuppressWarnings("unchecked")
     public static ArrayList buildMinuteListStart(TimeRange timeRange ) {
         Date dateStart = timeRange.getStart_time();
         Calendar calendarStart = Calendar.getInstance();
@@ -227,6 +230,7 @@ public class Common {
 
         return minList;
     }
+    @SuppressWarnings("unchecked")
     public static ArrayList buildMinuteListEnd(TimeRange timeRange) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(timeRange.getEnd_time());
@@ -239,6 +243,7 @@ public class Common {
 
         return minList;
     }
+    @SuppressWarnings("unchecked")
     public static ArrayList buildNomalMinuteList() {
         ArrayList minuteList = new ArrayList<>();
 

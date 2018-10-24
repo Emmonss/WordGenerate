@@ -16,21 +16,22 @@ import java.util.List;
 
 /**
  * Created by Emmons on 2018/10/16 0016.
+ * 公司名称列表Adapter
  */
 
 public class ComName_Adapter extends BaseAdapter {
     int currentNum = -1;
     private Context mContext;
-    private List<Person> mDatas = new ArrayList();
+    private List<Person> mDatas;
 
-    public ComName_Adapter(Context context,List datas) {
+    public ComName_Adapter(Context context,List<Person> datas) {
 
         mContext = context;
         mDatas = new ArrayList<Person>();
         mDatas.addAll(datas);
     }
 
-    public void setDatas(List datas){
+    public void setDatas(List<Person> datas){
         mDatas = datas;
     }
 
@@ -73,8 +74,6 @@ public class ComName_Adapter extends BaseAdapter {
         return convertView;
 
     }
-
-
 
     static class ViewHolder {
         TextView mTvTitle;

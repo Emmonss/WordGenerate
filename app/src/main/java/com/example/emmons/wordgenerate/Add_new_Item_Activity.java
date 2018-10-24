@@ -12,11 +12,12 @@ import android.widget.Toast;
 
 /**
  * Created by Emmons on 2018/10/18 0018.
+ * 添加新的公司名称的条目
  */
 
 public class Add_new_Item_Activity extends AppCompatActivity {
     EditText et_add_item;
-    ImageView iv_delete,iv_back;
+    ImageView iv_delete,iv_back,iv_delete_additem;
     Button bt_confirm;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +29,14 @@ public class Add_new_Item_Activity extends AppCompatActivity {
         iv_delete = (ImageView)findViewById(R.id.iv_delete_additem);
         et_add_item = (EditText)findViewById(R.id.et_add_item) ;
         iv_back = (ImageView)findViewById(R.id.iv_additem_back);
+        iv_delete_additem = (ImageView)findViewById(R.id.iv_delete_additem);
+
+        iv_delete_additem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                et_add_item.setText("");
+            }
+        });
 
         iv_back.setOnClickListener(new View.OnClickListener() {
             @Override

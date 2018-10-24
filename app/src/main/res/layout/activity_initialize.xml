@@ -15,23 +15,25 @@
 
         <ImageView
             android:id="@+id/open_folder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
             android:layout_marginBottom="102dp"
             android:layout_marginStart="73dp"
             android:layout_weight="1"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:src="@mipmap/open_file"
+            />
 
         <ImageView
             android:id="@+id/make_model"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="65dp"
+            android:layout_height="60dp"
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/open_folder"
             android:layout_marginEnd="59dp"
-            app:srcCompat="@mipmap/ic_launcher" />
+            android:src="@mipmap/mode_make"
+            />
 
         <TextView
             android:id="@+id/textView"

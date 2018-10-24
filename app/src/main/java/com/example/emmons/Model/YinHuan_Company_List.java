@@ -24,7 +24,6 @@ public class YinHuan_Company_List {
     private final String path;
 
     private static final String Table_Name  = "ComName";
-    private static final int DB_VERSION = 1;
     private static final String ComName= "name";
 
     private SQLiteDatabase db;

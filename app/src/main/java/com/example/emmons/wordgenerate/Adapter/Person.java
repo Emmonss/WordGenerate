@@ -7,7 +7,7 @@ package com.example.emmons.wordgenerate.Adapter;
 import java.io.Serializable;
 
 /**
- * 功能：
+ * 功能：公司名称的实体类
  */
 public class Person implements Serializable {
     private String Title; //每条item的数据
