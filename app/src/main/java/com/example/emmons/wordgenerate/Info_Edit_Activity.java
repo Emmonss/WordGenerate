@@ -567,7 +567,7 @@ public class Info_Edit_Activity  extends AppCompatActivity {
                     // 得到图片的全路径
                     Uri uri = data.getData();
                     String[] proj = {MediaStore.Images.Media.DATA};
-                    //好像是android多媒体数据库的封装接口，具体的看Android文档
+                    //android多媒体数据库的封装接口，具体的看Android文档
                     Cursor cursor = getContentResolver().query(uri, proj, null, null, null);
                     //按我个人理解 这个是获得用户选择的图片的索引值
                     int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -576,14 +576,10 @@ public class Info_Edit_Activity  extends AppCompatActivity {
                     //最后根据索引值获取图片路径
                     String path = cursor.getString(column_index);
                     pohto_path.add(path);
-
-
                     uploadImage(path);
                 }
-
             }
             else if (requestCode == PHOTO_REQUEST_CAREMA ) {
-                    Toast.makeText(this, "data.getData():"+tempFile.getPath(), Toast.LENGTH_SHORT).show();
                     // 从相机返回的数据
                     if (hasSdcard()) {
                         if (tempFile != null) {
@@ -592,18 +588,12 @@ public class Info_Edit_Activity  extends AppCompatActivity {
                         } else {
                             Toast.makeText(this, "相机异常请稍后再试！", Toast.LENGTH_SHORT).show();
                         }
-
-                        Log.i("images", "拿到照片path=" + tempFile.getPath());
                     } else {
                         Toast.makeText(this, "未找到存储卡，无法存储照片！", Toast.LENGTH_SHORT).show();
                     }
             }
 
         }
-
-
-
-
     }
 
     Handler handler = new Handler() {

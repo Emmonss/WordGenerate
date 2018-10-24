@@ -28,8 +28,8 @@
     <string name="minute">分</string>
 
 
-    <string name="Yinhuan_title">标题</string>
-    <string name="Yinhuan_title_hint">请输入标题：</string>
+    <string name="Yinhuan_title">文档名</string>
+    <string name="Yinhuan_title_hint">请输入文档名：</string>
 
     <string name="Yinhuan_XiangMuBu">项目部</string>
     <string name="Yinhuan_XiangMuBu_hint">请输入项目部的名称：</string>
