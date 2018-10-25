@@ -30,12 +30,14 @@ import java.io.InputStream;
 
 
 public class Initialize_Activity extends AppCompatActivity {
+
     public static final int REQUEST_PERMISSION_CODE = 1;
     public String FILE_PATH_NAME = "WordGenerate";
 
     private Common_Fuction cf;
     private ImageView iv_open_folder;
     private ImageView iv_open_model;
+    File appDir;
 
 
     protected void onCreate(@Nullable final Bundle savedInstanceState){
@@ -43,11 +45,11 @@ public class Initialize_Activity extends AppCompatActivity {
         setContentView(R.layout.activity_initialize);
 
         cf = new Common_Fuction();
-
-        File appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
         get_SDcard_permission();
+        appDir = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME);
 
         get_File_Path(appDir);
+
 
 
 
@@ -56,6 +58,7 @@ public class Initialize_Activity extends AppCompatActivity {
         iv_open_folder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                get_File_Path(appDir);
                 Open_Folder();
             }
         });
@@ -66,6 +69,7 @@ public class Initialize_Activity extends AppCompatActivity {
         iv_open_model.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                get_File_Path(appDir);
                 Make_Model();
             }
         });
@@ -91,11 +95,17 @@ public class Initialize_Activity extends AppCompatActivity {
 
     //查看目标文件夹是否创建
     private void get_File_Path(File appDir){
-        if (!appDir.exists())
+        if (!appDir.exists()) {
             appDir.mkdir();
+            add_Default_File(FILE_PATH_NAME);
+            add_Mode_File(FILE_PATH_NAME);
+        }
+        else {
+            add_Default_File(FILE_PATH_NAME);
+            add_Mode_File(FILE_PATH_NAME);
+        }
 
-        add_Default_File(FILE_PATH_NAME);
-        add_Mode_File(FILE_PATH_NAME);
+
         notifySystemToScan(appDir);
     }
 
@@ -105,23 +115,23 @@ public class Initialize_Activity extends AppCompatActivity {
             String default_path = Environment.getExternalStorageDirectory()+"/"+FILE_PATH_NAME + "/file/";
             File default_file = new File(Environment.getExternalStorageDirectory(), FILE_PATH_NAME + "/file/");
             //Log.i("docx_1",default_file.getAbsolutePath());
-            String default_file_doc = default_path+"1.docx";
+
             if (!default_file.exists())
                 default_file.mkdir();
 
-            //如果默认文件夹没有文件，最有添加默认范例。
+            String default_file_doc = default_path+"1.docx";
+                //如果默认文件夹没有文件，最有添加默认范例。
             File[] list = default_file.listFiles(new FileFilter() {
-                public boolean accept(File file) {
-                    return file.getName().endsWith(".docx");
-                }
-            });
+                    public boolean accept(File file) {
+                        return file.getName().endsWith(".docx");
+                    }
+                });
 
-            if(list.length==0){
-                InputStream inputStream = getAssets().open("1.docx");
-                cf.Write_TXT(new File(default_file_doc),inputStream);
-                //Log.i("docx_2",default_file_doc);
-                //FileUtils.writeFile(new File(Environment.getExternalStorageDirectory(),default_file_doc), inputStream);
+            if (list.length == 0) {
+                    InputStream inputStream = getAssets().open("1.docx");
+                    cf.Write_TXT(new File(default_file_doc), inputStream);
             }
+
         }
         catch (Exception err){
             //Log.e("docx_err",err.toString());
@@ -135,12 +145,13 @@ public class Initialize_Activity extends AppCompatActivity {
             default_file.mkdir();
         try {
             InputStream model_yinhuan_comname = getAssets().open("comname.db");
-            //添加一号模板
+                //添加一号模板
             new Model_YinHuan(Initialize_Activity.this,FILE_PATH_NAME + "/mode/",model_yinhuan_comname);
         }
         catch (Exception err){
-            Log.e("file",err.toString());
+                Log.e("file",err.toString());
         }
+
 
 
 
@@ -173,8 +184,7 @@ public class Initialize_Activity extends AppCompatActivity {
             int checkCallPhonePermission = ContextCompat.checkSelfPermission(Initialize_Activity.this, Manifest.permission.CAMERA);
             int checkWriteSDPermission = ContextCompat.checkSelfPermission(Initialize_Activity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
             if (checkCallPhonePermission != PackageManager.PERMISSION_GRANTED || checkWriteSDPermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(Initialize_Activity.this, new String[]{Manifest.permission.CAMERA
-                        , Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
+                ActivityCompat.requestPermissions(Initialize_Activity.this, new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSION_CODE);
             }
             else {
             }

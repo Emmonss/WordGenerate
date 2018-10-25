@@ -1,6 +1,9 @@
 package com.example.emmons.Function;
 
+import android.graphics.BitmapFactory;
+
 import org.apache.poi.util.Units;
+import org.apache.poi.xwpf.usermodel.ParagraphAlignment;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
 import org.apache.poi.xwpf.usermodel.XWPFRun;
@@ -60,6 +63,7 @@ public class replace_data {
         List<XWPFTable> tables = doc.getTables();
         XWPFTableRow cell = tables.get(0).getRow(0);
         XWPFRun paras = cell.getTableCells().get(0).getParagraphs().get(0).createRun();
+
         for (int i =0;i<list.size();i++){
             paras.addBreak();
             paras.setText(list.get(i));
@@ -90,12 +94,40 @@ public class replace_data {
     }
 
 
-    public void Add_img(XWPFDocument doc,String img){
+
+
+    public void Add_img(XWPFDocument doc,String img,int i){
         try {
+            //图片缩放
+            int height,width;
+            BitmapFactory.Options op=new BitmapFactory.Options();
+            op.inJustDecodeBounds=true;
+            BitmapFactory.decodeFile(img, op);
+
+
+            if(op.outWidth>200){
+                width = 200;
+                height = op.outHeight*200/op.outWidth;
+            }
+            else if(op.outHeight>300){
+                height = 300;
+                width = op.outWidth*300/op.outHeight;
+            }
+            else {
+                height = op.outHeight;
+                width = op.outWidth;
+            }
+
             InputStream iimg = new FileInputStream(img);
             XWPFParagraph paragraph = doc.createParagraph();
+            paragraph.setAlignment(ParagraphAlignment.CENTER);
             XWPFRun run = paragraph.createRun();
-            run.addPicture(iimg, XWPFDocument.PICTURE_TYPE_JPEG, "android.jpeg", Units.toEMU(150), Units.toEMU(150));
+            run.addPicture(iimg, XWPFDocument.PICTURE_TYPE_JPEG, "android.jpeg", Units.toEMU(width), Units.toEMU(height));
+
+            XWPFParagraph singal = doc.createParagraph();
+            singal.setAlignment(ParagraphAlignment.CENTER);
+            XWPFRun run2 = singal.createRun();
+            run2.setText("图片("+i+")");
         }
         catch (Exception e){
             e.printStackTrace();

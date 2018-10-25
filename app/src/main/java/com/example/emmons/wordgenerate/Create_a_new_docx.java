@@ -128,7 +128,7 @@ public class Create_a_new_docx extends AppCompatActivity {
         list.add(item8);
         for(int i =0;i<yinhuan_list.size();i++)
         {
-            String[] item = {"隐患"+i+":",yinhuan_list.get(i)};
+            String[] item = {"隐患"+(i+1)+":",yinhuan_list.get(i)};
             list.add(item);
         }
         String[] item9 = {"图片数目:",String.valueOf(pohto_path.size())};
@@ -160,7 +160,7 @@ public class Create_a_new_docx extends AppCompatActivity {
                     rep.replaceInTable(doc, params);
                     rep.Add_Info(doc,yinhuan_list);
                     for(int i=0;i<pohto_path.size();i++){
-                        rep.Add_img(doc,pohto_path.get(i));
+                        rep.Add_img(doc,pohto_path.get(i),i+1);
                     }
                     OutputStream os = new FileOutputStream(out2);
                     doc.write(os);
