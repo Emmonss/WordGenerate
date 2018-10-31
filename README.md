@@ -12,3 +12,9 @@ Android 表格模板生成器<br>
 关于内容详情见我的博客<br>
 https://blog.csdn.net/qq_31548387/article/details/83415700<br>
 目前该项目就这样，先收工，弄其他的了<br>
+<br>
+<br>
+<br>
+-----2018.10.31------<br>
+修复了scrollview下gridview不能下拉的bug<br>
+其实就是参考其他博客，重载了一下girdview。<br>
